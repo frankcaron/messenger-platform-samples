@@ -315,7 +315,7 @@ function receivedMessage(event) {
       default:
         var messageRegExp = new RegExp(messageText);
 
-        if (messageRegExp.test("restaurant")) {
+        if (messageRegExp.test(/^restaurant$/)) {
             sendTextMessage(senderID, "Let me find you one...");
         } else {
             sendTextMessage(senderID, "Hrm. I haven't learned that command yet.");
