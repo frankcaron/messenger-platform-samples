@@ -408,11 +408,11 @@ function sendRestaurantList(recipientId, restaurants) {
             subtitle: "This restaurant rules bruh.",
             item_url: "https://www.oculus.com/en-us/rift/",
             image_url: SERVER_URL + "/assets/rift.png",
-            buttons: [{
+            default_action: {
               type: "web_url",
               url: "https://www.google.ca/" + restaurants[i][3],
               title: "Open Web URL"
-            }]
+            }
           }
   }
 
@@ -424,7 +424,7 @@ function sendRestaurantList(recipientId, restaurants) {
       attachment: {
         type: "template",
         payload: {
-          template_type: "generic",
+          template_type: "list",
           elements: restaurantList
         }
       }
