@@ -317,8 +317,8 @@ function receivedMessage(event) {
 
         default:
                if (messageText.includes("restaurant")) {
-                 sendQuickReply(senderID);
-                 sendTextMessage(senderID, "Let me find you one...");
+                 sendRestaurantQuickReply(senderID);
+                 //sendTextMessage(senderID, "Let me find you one...");
                  //sendQuickReply(senderID);
                } else {
                  sendTextMessage(senderID, "Hrm. I haven't learned that command yet.");
@@ -730,6 +730,24 @@ function sendQuickReply(recipientId) {
           "content_type":"text",
           "title":"Drama",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+        }
+      ]
+    }
+  };
+
+  callSendAPI(messageData);
+}
+
+function sendRestaurantQuickReply(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Send me your location",
+      quick_replies: [
+        {
+          "content_type":"location",
         }
       ]
     }
