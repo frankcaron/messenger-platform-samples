@@ -264,7 +264,7 @@ function receivedMessage(event) {
 
 
     switch (messageText) {
-      case /^(restaurant)$/.exec(messageText):
+      case /^(restaurant)$/.test(messageText):
         sendTextMessage(senderID, "Let me find you a neat restaurant near you...");
         break;
       case 'image':
