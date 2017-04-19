@@ -318,8 +318,6 @@ function receivedMessage(event) {
         default:
                if (messageText.includes("restaurant")) {
                  sendRestaurantQuickReply(senderID);
-                 //sendTextMessage(senderID, "Let me find you one...");
-                 //sendQuickReply(senderID);
                } else {
                  sendTextMessage(senderID, "Hrm. I haven't learned that command yet.");
                }
@@ -356,7 +354,7 @@ function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
 }
 
 function nearestCity(latitude, longitude) {
-  var mindif = 99999;
+  var mindif = 50;
   var closest;
 
   var cities = [
@@ -364,8 +362,10 @@ function nearestCity(latitude, longitude) {
     ["Waynesboro, Georgia", 33.0902571, -82.0149785, "Camino Real Mexican Restaurant"]
   ];
 
-  var lat = 20; // user's latitude
-  var lon = 40; // user's longitude
+  var lat = latitude; // user's latitude
+  var lon = longitude; // user's longitude
+
+  console.log("Number of cities: %s", cities.length);
 
   for (index = 0; index < cities.length; index++) {
     var dif = PythagorasEquirectangular(latitude, longitude, cities[index][1], cities[index][2]);
