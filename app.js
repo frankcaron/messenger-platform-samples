@@ -257,7 +257,7 @@ function receivedMessage(event) {
     // keywords and send back the corresponding example. Otherwise, just echo
     // the text we received.
 
-    switch (messageText) {
+    switch (messageText.toLowerCase()) {
 
       case 'image':
         sendImageMessage(senderID);
@@ -423,6 +423,7 @@ function sendRestaurantList(recipientId, restaurants) {
         type: "template",
         payload: {
           template_type: "list",
+          top_element_style: "compact",
           elements: restaurantList
         }
       }
