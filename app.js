@@ -318,7 +318,7 @@ function receivedMessage(event) {
         default:
                if (messageText.includes("restaurant")) {
                  sendTextMessage(senderID, "Let me find you one...");
-                 sendQuickReply();
+                 sendQuickReply(senderID);
                } else {
                  sendTextMessage(senderID, "Hrm. I haven't learned that command yet.");
                }
