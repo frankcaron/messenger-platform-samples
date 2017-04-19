@@ -347,10 +347,11 @@ function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
 
 function nearestCity(latitude, longitude, senderID) {
   var mindif = 50;
-  var closest;
+  var closest = 0;
 
   var cities = [
     ["Ottawa, ON", 45.4159876, -75.6950013, "T's Pub"],
+    ["Waynesboro, Georgia", 33.0902571, -82.0149785, "Camino Real Mexican Restaurant"],
     ["Waynesboro, Georgia", 33.0902571, -82.0149785, "Camino Real Mexican Restaurant"]
   ];
 
@@ -378,6 +379,11 @@ function nearestCity(latitude, longitude, senderID) {
       console.log("City matched: %s", cities[closest]);
       console.log("==========");
     }
+  }
+
+  if (closest == 0) {
+    console.log("Found no matches.");
+    sendTextMessage(senderID, "Bah. Looks like we couldn't find a restaurant close to you. Sorry about that!");
   }
 }
 
@@ -790,7 +796,7 @@ function sendRestaurantQuickReply(recipientId) {
       id: recipientId
     },
     message: {
-      text: "Send me your location",
+      text: "Happy to help you find a place to eat. First thing's first. Where are you? Send me your location and I'll help you out.",
       quick_replies: [
         {
           "content_type":"location",
