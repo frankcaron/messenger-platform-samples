@@ -356,12 +356,12 @@ function nearestCity(latitude, longitude, senderID) {
 
   var cities = [
     ["Ottawa, ON", 45.4159876, -75.6950013, "T's Pub"],
-    ["Waynesboro, Georgia", 33.0902571, -82.0149785, "Camino Real Mexican Restaurant"],
     ["Waynesboro, Georgia", 33.0902571, -82.0149785, "Camino Real Mexican Restaurant"]
   ];
 
   var lat = latitude; // user's latitude
   var lon = longitude; // user's longitude
+  var restaurants = []; // array for matching restaurants
 
   console.log("Number of cities: %s", cities.length);
 
@@ -379,7 +379,7 @@ function nearestCity(latitude, longitude, senderID) {
 
     if (dif < mindif) {
       closest = i;
-      sendTextMessage(senderID, "A close restaurant has been found: " + cities[closest]);
+      restaurants.push(cities[closest])
       console.log("Found a match with: %s", cities.length);
       console.log("City matched: %s", cities[closest]);
       console.log("==========");
@@ -389,7 +389,48 @@ function nearestCity(latitude, longitude, senderID) {
   if (closest == 0) {
     console.log("Found no matches.");
     sendTextMessage(senderID, "Bah. Looks like we couldn't find a restaurant close to you. Sorry about that!");
+  } else {
+    sendRestaurantList(senderID, restaurants);
   }
+}
+
+/*
+ * Send a Structured Message (Generic Message type) using the Send API.
+ *
+ */
+function sendRestaurantList(recipientId, restaurants) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          elements: [{
+            for (var i = 0; i < restaurants.length; i++) {
+              title: restaurants[i][3],
+              subtitle: "Fancy restaurant",
+              item_url: "https://www.oculus.com/en-us/rift/",
+              image_url: SERVER_URL + "/assets/rift.png",
+              buttons: [{
+                type: "web_url",
+                url: "https://www.oculus.com/en-us/rift/",
+                title: "Open Web URL"
+              }, {
+                type: "postback",
+                title: "Call Postback",
+                payload: "Payload for first bubble",
+              }],
+            }
+          }
+        }
+      }
+    }
+  };
+
+  callSendAPI(messageData);
 }
 
 /*
