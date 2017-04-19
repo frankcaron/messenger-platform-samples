@@ -336,13 +336,7 @@ function receivedMessage(event) {
   }
 }
 
-var cities = [
-  ["Ottawa, ON", 45.4159876, -75.6950013, "T's Pub"],
-  ["Waynesboro, Georgia", 33.0902571, -82.0149785, "Camino Real Mexican Restaurant"]
-];
 
-var lat = 20; // user's latitude
-var lon = 40; // user's longitude
 
 // Convert Degress to Radians
 function Deg2Rad(deg) {
@@ -365,7 +359,15 @@ function nearestCity(latitude, longitude) {
   var mindif = 99999;
   var closest;
 
-  for (index = 0; index < cities.length; ++index) {
+  var cities = [
+    ["Ottawa, ON", 45.4159876, -75.6950013, "T's Pub"],
+    ["Waynesboro, Georgia", 33.0902571, -82.0149785, "Camino Real Mexican Restaurant"]
+  ];
+
+  var lat = 20; // user's latitude
+  var lon = 40; // user's longitude
+
+  for (index = 0; index < cities.length; index++) {
     var dif = PythagorasEquirectangular(latitude, longitude, cities[index][1], cities[index][2]);
     if (dif < mindif) {
       closest = index;
@@ -373,7 +375,6 @@ function nearestCity(latitude, longitude) {
     }
   }
 
-  // echo the nearest city
   sendTextMessage(senderID, "The closest restaurant is: " + cities[closest][0]);
 }
 
