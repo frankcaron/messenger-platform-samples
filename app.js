@@ -409,8 +409,7 @@ function sendRestaurantList(recipientId, restaurants) {
             image_url: SERVER_URL + "/assets/rift.png",
             default_action: {
               type: "web_url",
-              url: "https://www.google.ca/" + restaurants[i][3],
-              title: "Open Web URL"
+              url: "https://www.google.ca/" + restaurants[i][3]
             }
           }
   }
