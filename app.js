@@ -364,19 +364,25 @@ function nearestCity(latitude, longitude, senderID) {
   console.log("Number of cities: %s", cities.length);
 
   for (var i = 0; i < cities.length; i++) {
+
     var dif = PythagorasEquirectangular(latitude, longitude, cities[i][1], cities[i][2]);
+
+    //Test
+    console.log("==========");
+    console.log("City Lat: " + cities[i][1]);
+    console.log("City Lon: " + cities[i][2]);
+    console.log("Lat/Lon Diff: " + dif);
+    console.log("Min Dif: " + mindif);
+    console.log("==========");
+
     if (dif < mindif) {
       closest = i;
-      break;
+      sendTextMessage(senderID, "A close restaurant has been found: " + cities[closest]);
+      console.log("Found a match with: %s", cities.length);
+      console.log("City matched: %s", cities[closest]);
+      console.log("==========");
     }
   }
-
-  if (cities[closest][0] != null) {
-    sendTextMessage(senderID, "The closest restaurant is: " + cities[closest][0]);
-  } else {
-    sendTextMessage(senderID, "There are no restaurants closed to your location. Sorry, bruh.");
-  }
-  
 }
 
 /*
