@@ -256,8 +256,15 @@ function receivedMessage(event) {
     // If we receive a text message, check to see if it matches any special
     // keywords and send back the corresponding example. Otherwise, just echo
     // the text we received.
+    var str = '#somethingelse'
+    var M = /^(restaurant)$/.exec(messageText)
+    if (result[1]) {
+      //do something
+    }
+
+
     switch (messageText) {
-      case /restaurant/.test(messageText):
+      case /^(restaurant)$/.exec(messageText):
         sendTextMessage(senderID, "Let me find you a neat restaurant near you...");
         break;
       case 'image':
