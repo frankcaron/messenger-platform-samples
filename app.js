@@ -257,9 +257,6 @@ function receivedMessage(event) {
     // keywords and send back the corresponding example. Otherwise, just echo
     // the text we received.
 
-    //Cases
-    var matchesRestaurant = /restaurant/.test(messageText);
-
     //Switch
     switch (messageText) {
 
@@ -314,13 +311,15 @@ function receivedMessage(event) {
       case 'account linking':
         sendAccountLinking(senderID);
         break;
-
-      case matchesRestaurant:
-        sendTextMessage(senderID, "Let me find one...");
-        break;
   
       default:
-        sendTextMessage(senderID, messageText);
+        var messageRegExp = new RegExp(messageText);
+
+        if (messageRegExp.test("restaurant")) {
+            sendTextMessage(senderID, "Let me find you one...");
+        } else {
+            sendTextMessage(senderID, "Hrm. I haven't learned that command yet.");
+        }
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
