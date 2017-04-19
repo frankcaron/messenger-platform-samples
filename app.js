@@ -409,22 +409,20 @@ function sendRestaurantList(recipientId, restaurants) {
         payload: {
           template_type: "generic",
           elements: [{
-            for (var i = 0; i < restaurants.length; i++) {
-              title: restaurants[i][3],
-              subtitle: "Fancy restaurant",
-              item_url: "https://www.oculus.com/en-us/rift/",
-              image_url: SERVER_URL + "/assets/rift.png",
-              buttons: [{
-                type: "web_url",
-                url: "https://www.oculus.com/en-us/rift/",
-                title: "Open Web URL"
-              }, {
-                type: "postback",
-                title: "Call Postback",
-                payload: "Payload for first bubble",
-              }],
-            }
-          }
+            title: restaurants[0][3],
+            subtitle: "Next-generation virtual reality",
+            item_url: "https://www.oculus.com/en-us/rift/",
+            image_url: SERVER_URL + "/assets/rift.png",
+            buttons: [{
+              type: "web_url",
+              url: "https://www.oculus.com/en-us/rift/",
+              title: "Open Web URL"
+            }, {
+              type: "postback",
+              title: "Call Postback",
+              payload: "Payload for first bubble",
+            }],
+          }]
         }
       }
     }
