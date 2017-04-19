@@ -329,11 +329,38 @@ function receivedMessage(event) {
     sendTextMessage(senderID, "Your latitude is: " + messageAttachments[0].payload.coordinates.lat);
     sendTextMessage(senderID, "Your longtitude is: " + messageAttachments[0].payload.coordinates.long);
     console.log("Random commit");
-    //sendQuickReply(recipientId);
+
+    nearestCity(messageAttachments[0].payload.coordinates.lat, messageAttachments[0].payload.coordinates.long);
+
 
   }
 }
 
+var cities = [
+  ["Ottawa, ON", 45.4159876, -75.6950013, "T's Pub"],
+  ["Waynesboro, Georgia", 33.0902571, -82.0149785, "Camino Real Mexican Restaurant"]
+];
+
+// Convert Degress to Radians
+function Deg2Rad(deg) {
+  return deg * Math.PI / 180;
+}
+
+function nearestCity(latitude, longitude) {
+  var mindif = 99999;
+  var closest;
+
+  for (index = 0; index < cities.length; ++index) {
+    var dif = PythagorasEquirectangular( latitude, longitude, cities[ index ][ 1 ], cities[ index ][ 2 ] );
+    if (dif < mindif) {
+      closest = index;
+      mindif = dif;
+    }
+  }
+
+  // echo the nearest city
+  sendTextMessage(senderID, "The closest restaurant is: " + cities[closest]);
+}
 
 /*
  * Delivery Confirmation Event
