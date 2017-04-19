@@ -8,7 +8,6 @@
  */
 
 /* jshint node: true, devel: true */
-//Test
 'use strict';
 
 const
@@ -258,7 +257,6 @@ function receivedMessage(event) {
     // keywords and send back the corresponding example. Otherwise, just echo
     // the text we received.
 
-    //Switch
     switch (messageText) {
 
       case 'image':
@@ -312,18 +310,20 @@ function receivedMessage(event) {
       case 'account linking':
         sendAccountLinking(senderID);
         break;
-  
+
+      case 'restaurant':
+        sendTextMessage(senderID, "Let me find one...");
+        break;
+
       default:
-        if (messageText.includes("restaurant")) {
-            sendTextMessage(senderID, "Let me find you one...");
-        } else {
-            sendTextMessage(senderID, "Hrm. I haven't learned that command yet.");
-        }
+        sendTextMessage(senderID, messageText);
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
     sendTextMessage(senderID, "Your latitude is: " + messageAttachments[0].payload.coordinates.lat)
     sendTextMessage(senderID, "Your longtitude is: " + messageAttachments[0].payload.coordinates.long)
+    console.log("Random commit",
+
   }
 }
 
