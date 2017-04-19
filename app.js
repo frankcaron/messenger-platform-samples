@@ -330,7 +330,7 @@ function receivedMessage(event) {
     sendTextMessage(senderID, "Your longtitude is: " + messageAttachments[0].payload.coordinates.long);
     console.log("Random commit");
 
-    //nearestCity(messageAttachments[0].payload.coordinates.lat, messageAttachments[0].payload.coordinates.long);
+    nearestCity(messageAttachments[0].payload.coordinates.lat, messageAttachments[0].payload.coordinates.long);
 
 
   }
@@ -366,7 +366,7 @@ function nearestCity(latitude, longitude) {
   var closest;
 
   for (index = 0; index < cities.length; ++index) {
-    var dif = PythagorasEquirectangular( latitude, longitude, cities[ index ][ 1 ], cities[ index ][ 2 ] );
+    var dif = PythagorasEquirectangular(latitude, longitude, cities[index][1], cities[index][2]);
     if (dif < mindif) {
       closest = index;
       mindif = dif;
@@ -374,7 +374,8 @@ function nearestCity(latitude, longitude) {
   }
 
   // echo the nearest city
-  sendTextMessage(senderID, "The closest restaurant is: " + cities[closest]);
+  sendTextMessage(senderID, "The closest restaurant is: " + cities[closest][0]);
+  break;
 }
 
 /*
