@@ -311,16 +311,12 @@ function receivedMessage(event) {
         sendAccountLinking(senderID);
         break;
 
-      case 'restaurant':
-        sendTextMessage(senderID, "Let me find one...");
-        break;
-
-        default:
-               if (messageText.includes("restaurant")) {
-                 sendRestaurantQuickReply(senderID);
-               } else {
-                 sendTextMessage(senderID, "Hrm. I haven't learned that command yet.");
-               }
+      default:
+             if (messageText.includes("restaurant")) {
+               sendRestaurantQuickReply(senderID);
+             } else {
+               sendTextMessage(senderID, "Hrm. I haven't learned that command yet.");
+             }
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Awesome. Let me look that up for you. One sec!");
