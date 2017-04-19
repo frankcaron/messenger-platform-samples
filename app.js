@@ -406,11 +406,16 @@ function sendRestaurantList(recipientId, restaurants) {
     restaurantList[i] = {
             title: restaurants[i][3],
             subtitle: "This restaurant rules bruh.",
-            image_url: SERVER_URL + "/assets/rift.png",
+            //image_url: SERVER_URL + "/assets/rift.png",
             default_action: {
               type: "web_url",
-              url: "https://www.google.ca/" + restaurants[i][3]
-            }
+              url: "https://www.google.ca/#q=" + restaurants[i][3] + " " + restaurants[i][0]
+            },
+            buttons:[{
+                type: "web_url",
+                url: "https://www.google.ca/#q=" + restaurants[i][3],
+                title: "Visit Venue Website"
+              }]
           }
   }
 
@@ -422,8 +427,7 @@ function sendRestaurantList(recipientId, restaurants) {
       attachment: {
         type: "template",
         payload: {
-          template_type: "list",
-          top_element_style: "compact",
+          template_type: "generic",
           elements: restaurantList
         }
       }
