@@ -319,14 +319,12 @@ function receivedMessage(event) {
              }
     }
   } else if (messageAttachments) {
-    console.log("User's latitude is: " + messageAttachments[0].payload.coordinates.lat);
-    console.log("User's longtitude is: " + messageAttachments[0].payload.coordinates.long);
+
     sendTextMessage(senderID, "Awesome. Let me look that up for you. One sec!");
 
-    //Sleep
-    suspend(function* () {
-        yield setTimeout(suspend.resume(), 1000); // 1 seconds pass..
-    })();
+    //Test
+    console.log("User's latitude is: " + messageAttachments[0].payload.coordinates.lat);
+    console.log("User's longtitude is: " + messageAttachments[0].payload.coordinates.long);
 
     //Do your magic
     nearestCity(messageAttachments[0].payload.coordinates.lat, messageAttachments[0].payload.coordinates.long, senderID);
