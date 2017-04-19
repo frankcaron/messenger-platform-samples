@@ -311,20 +311,23 @@ function receivedMessage(event) {
         sendAccountLinking(senderID);
         break;
 
+      case 'restaurant':
+        sendTextMessage(senderID, "Let me find one...");
+        break;
 
-      default:
-             if (messageText.includes("restaurant")) {
-               sendRestaurantQuickReply(senderID);
-               //sendTextMessage(senderID, "Let me find you one...");
-               //sendQuickReply(senderID);
-             } else {
-               sendTextMessage(senderID, "Hrm. I haven't learned that command yet.");
-             }
+        default:
+               if (messageText.includes("restaurant")) {
+                 sendRestaurantQuickReply(senderID);
+                 //sendTextMessage(senderID, "Let me find you one...");
+                 //sendQuickReply(senderID);
+               } else {
+                 sendTextMessage(senderID, "Hrm. I haven't learned that command yet.");
+               }
     }
   } else if (messageAttachments) {
-    sendTextMessage(senderID, "Message with attachment received");
-    sendTextMessage(senderID, "Your latitude is: " + messageAttachments[0].payload.coordinates.lat);
-    sendTextMessage(senderID, "Your longtitude is: " + messageAttachments[0].payload.coordinates.long);
+    //sendTextMessage(senderID, "Message with attachment received");
+    //sendTextMessage(senderID, "Your latitude is: " + messageAttachments[0].payload.coordinates.lat);
+    //sendTextMessage(senderID, "Your longtitude is: " + messageAttachments[0].payload.coordinates.long);
     console.log("Random commit");
 
     nearestCity(messageAttachments[0].payload.coordinates.lat, messageAttachments[0].payload.coordinates.long);
