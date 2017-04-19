@@ -328,7 +328,7 @@ function receivedMessage(event) {
     sendTextMessage(senderID, "Your longtitude is: " + messageAttachments[0].payload.coordinates.long);
     console.log("Random commit");
 
-    nearestCity(messageAttachments[0].payload.coordinates.lat, messageAttachments[0].payload.coordinates.long);
+    nearestCity(messageAttachments[0].payload.coordinates.lat, messageAttachments[0].payload.coordinates.long,senderID);
 
 
   }
@@ -353,7 +353,7 @@ function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
   return d;
 }
 
-function nearestCity(latitude, longitude) {
+function nearestCity(latitude, longitude, senderID) {
   var mindif = 50;
   var closest;
 
