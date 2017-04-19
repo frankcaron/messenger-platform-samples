@@ -28,7 +28,7 @@ app.use(express.static('public'));
 var customerList = ["salesperson", "name", "phone", "type", "account_type", "street_1", "street 2", "street 3", "city","state","country", "zip", "full_address", "lat", "lon", "website"];
 require("csv-to-array")({
    file: "config/customers.csv",
-   customerList: customerList
+   columns: customerList
 }, function (err, array) {
   console.log("Parsing CSV");
   console.log(err || array);
