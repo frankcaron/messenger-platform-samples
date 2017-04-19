@@ -399,6 +399,22 @@ function nearestCity(latitude, longitude, senderID) {
  *
  */
 function sendRestaurantList(recipientId, restaurants) {
+
+  var restaurantList = [];
+
+  for (var i = 0; i < restaurants.length; i++) {
+    restaurantList[i] = {
+            title: restaurants[i][3],
+            subtitle: "This restaurant rules bruh.",
+            item_url: "https://www.oculus.com/en-us/rift/",
+            image_url: SERVER_URL + "/assets/rift.png",
+            buttons: [{
+              type: "web_url",
+              url: "https://www.google.ca/" + restaurants[i][3],
+              title: "Open Web URL"
+            }
+  }
+
   var messageData = {
     recipient: {
       id: recipientId
@@ -408,21 +424,7 @@ function sendRestaurantList(recipientId, restaurants) {
         type: "template",
         payload: {
           template_type: "generic",
-          elements: [{
-            title: restaurants[0][3],
-            subtitle: "Next-generation virtual reality",
-            item_url: "https://www.oculus.com/en-us/rift/",
-            image_url: SERVER_URL + "/assets/rift.png",
-            buttons: [{
-              type: "web_url",
-              url: "https://www.oculus.com/en-us/rift/",
-              title: "Open Web URL"
-            }, {
-              type: "postback",
-              title: "Call Postback",
-              payload: "Payload for first bubble",
-            }],
-          }]
+          elements: restaurantList
         }
       }
     }
