@@ -24,6 +24,16 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.use(express.static('public'));
 
+//Set Up CSV
+var columns = ["salesperson", "phone", "type", "street_1", "street 2", "street 3", "city","state","country", "zip", "full_address", "lat", "lon", "website"];
+require("csv-to-array")({
+   file: "config/customers.csv",
+   columns: columns
+}, function (err, array) {
+  console.log("Parsing CSV");
+  console.log(err || array);
+});
+
 /*
  * Be sure to setup your config values before running this code. You can
  * set them using environment variables or modifying the config file in /config.
@@ -233,7 +243,7 @@ function receivedMessage(event) {
   var metadata = message.metadata;
 
   // You may get a text or attachment but not both
-  var messageText = message.text;
+  var messageText = message.text.toLowerCase();
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
 
@@ -257,7 +267,7 @@ function receivedMessage(event) {
     // keywords and send back the corresponding example. Otherwise, just echo
     // the text we received.
 
-    switch (messageText.toLowerCase()) {
+    switch (messageText) {
 
       case 'image':
         sendImageMessage(senderID);
