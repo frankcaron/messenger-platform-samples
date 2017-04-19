@@ -315,13 +315,17 @@ function receivedMessage(event) {
         sendTextMessage(senderID, "Let me find one...");
         break;
 
-      default:
-        sendTextMessage(senderID, messageText);
+        default:
+               if (messageText.includes("restaurant")) {
+                 sendTextMessage(senderID, "Let me find you one...");
+               } else {
+                 sendTextMessage(senderID, "Hrm. I haven't learned that command yet.");
+               }
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
-    sendTextMessage(senderID, "Your latitude is: " + messageAttachments[0].payload.coordinates.lat);
-    sendTextMessage(senderID, "Your longtitude is: " + messageAttachments[0].payload.coordinates.long);
+    sendTextMessage(senderID, "Your latitude is: " + messageAttachments[0].payload.coordinates.lat)
+    sendTextMessage(senderID, "Your longtitude is: " + messageAttachments[0].payload.coordinates.long)
     console.log("Random commit");
 
   }
