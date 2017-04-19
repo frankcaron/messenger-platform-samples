@@ -406,7 +406,6 @@ function sendRestaurantList(recipientId, restaurants) {
     restaurantList[i] = {
             title: restaurants[i][3],
             subtitle: "This restaurant rules bruh.",
-            item_url: "https://www.oculus.com/en-us/rift/",
             image_url: SERVER_URL + "/assets/rift.png",
             default_action: {
               type: "web_url",
