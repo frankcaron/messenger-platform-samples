@@ -330,7 +330,7 @@ function receivedMessage(event) {
     sendTextMessage(senderID, "Your longtitude is: " + messageAttachments[0].payload.coordinates.long);
     console.log("Random commit");
 
-    //nearestCity(messageAttachments[0].payload.coordinates.lat, messageAttachments[0].payload.coordinates.long);
+    nearestCity(messageAttachments[0].payload.coordinates.lat, messageAttachments[0].payload.coordinates.long);
 
 
   }
@@ -341,9 +341,24 @@ var cities = [
   ["Waynesboro, Georgia", 33.0902571, -82.0149785, "Camino Real Mexican Restaurant"]
 ];
 
+var lat = 20; // user's latitude
+var lon = 40; // user's longitude
+
 // Convert Degress to Radians
 function Deg2Rad(deg) {
   return deg * Math.PI / 180;
+}
+
+function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
+  lat1 = Deg2Rad(lat1);
+  lat2 = Deg2Rad(lat2);
+  lon1 = Deg2Rad(lon1);
+  lon2 = Deg2Rad(lon2);
+  var R = 6371; // km
+  var x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
+  var y = (lat2 - lat1);
+  var d = Math.sqrt(x * x + y * y) * R;
+  return d;
 }
 
 function nearestCity(latitude, longitude) {
