@@ -319,10 +319,10 @@ function receivedMessage(event) {
              }
     }
   } else if (messageAttachments) {
-    sendTextMessage(senderID, "Awesome. Let me look that up for you. One sec!");
     console.log("User's latitude is: " + messageAttachments[0].payload.coordinates.lat);
     console.log("User's longtitude is: " + messageAttachments[0].payload.coordinates.long);
-    nearestCity(messageAttachments[0].payload.coordinates.lat, messageAttachments[0].payload.coordinates.long,senderID);
+    sendTextMessage(senderID, "Awesome. Let me look that up for you. One sec!");
+    nearestCity(messageAttachments[0].payload.coordinates.lat, messageAttachments[0].payload.coordinates.long, senderID);
   }
 }
 
