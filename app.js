@@ -25,10 +25,10 @@ app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.use(express.static('public'));
 
 //Set Up CSV
-var columns = ["salesperson", "phone", "type", "street_1", "street 2", "street 3", "city","state","country", "zip", "full_address", "lat", "lon", "website"];
+var customerList = ["salesperson", "name", "phone", "type", "account_type", "street_1", "street 2", "street 3", "city","state","country", "zip", "full_address", "lat", "lon", "website"];
 require("csv-to-array")({
    file: "config/customers.csv",
-   columns: columns
+   customerList: customerList
 }, function (err, array) {
   console.log("Parsing CSV");
   console.log(err || array);
@@ -364,34 +364,29 @@ function nearestCity(latitude, longitude, senderID) {
   var mindif = 4500;
   var closest = 0;
 
-  var cities = [
-    ["Ottawa, ON", 45.4159876, -75.6950013, "T's Pub"],
-    ["Waynesboro, Georgia", 33.0902571, -82.0149785, "Camino Real Mexican Restaurant"]
-  ];
-
   var lat = latitude; // user's latitude
   var lon = longitude; // user's longitude
   var restaurants = []; // array for matching restaurants
 
-  console.log("Number of cities: %s", cities.length);
+  console.log("Number of cities: %s", customerList.length);
 
-  for (var i = 0; i < cities.length; i++) {
+  for (var i = 0; i < customerList.length; i++) {
 
-    var dif = PythagorasEquirectangular(latitude, longitude, cities[i][1], cities[i][2]);
+    var dif = PythagorasEquirectangular(latitude, longitude, customerList[i][13], customerList[i][14]);
 
     //Test
     console.log("==========");
-    console.log("City Lat: " + cities[i][1]);
-    console.log("City Lon: " + cities[i][2]);
+    console.log("City Lat: " + customerList[i][13]);
+    console.log("City Lon: " + customerList[i][14]);
     console.log("Lat/Lon Diff: " + dif);
     console.log("Min Dif: " + mindif);
     console.log("==========");
 
     if (dif < mindif) {
       closest = i;
-      restaurants.push(cities[closest])
-      console.log("Found a match with: %s", cities.length);
-      console.log("City matched: %s", cities[closest]);
+      restaurants.push(customerList[closest])
+      console.log("Found a match with: %s", customerList.length);
+      console.log("City matched: %s", customerList[closest]);
       console.log("==========");
     }
   }
@@ -414,16 +409,16 @@ function sendRestaurantList(recipientId, restaurants) {
 
   for (var i = 0; i < restaurants.length; i++) {
     restaurantList[i] = {
-            title: restaurants[i][3],
+            title: restaurants[i][1],
             subtitle: "This restaurant rules bruh.",
             //image_url: SERVER_URL + "/assets/rift.png",
             default_action: {
               type: "web_url",
-              url: "https://www.google.ca/#q=" + restaurants[i][3] + " " + restaurants[i][0]
+              url: "https://www.google.ca/#q=" + restaurants[i][1] + " " + restaurants[i][8]
             },
             buttons:[{
                 type: "web_url",
-                url: "https://www.google.ca/#q=" + restaurants[i][3],
+                url: "https://www.google.ca/#q=" + restaurants[i][1] + " " + restaurants[i][8],
                 title: "Visit Venue Website"
               }]
           }
