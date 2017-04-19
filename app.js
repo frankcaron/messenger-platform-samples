@@ -257,6 +257,10 @@ function receivedMessage(event) {
     // keywords and send back the corresponding example. Otherwise, just echo
     // the text we received.
 
+    //Cases
+    var matchesRestaurant = /restaurant/.test(messageText);
+
+    //Switch
     switch (messageText) {
 
       case 'image':
@@ -311,10 +315,10 @@ function receivedMessage(event) {
         sendAccountLinking(senderID);
         break;
 
-      case 'restaurant':
+      case matchesRestaurant:
         sendTextMessage(senderID, "Let me find one...");
         break;
-
+  
       default:
         sendTextMessage(senderID, messageText);
     }
