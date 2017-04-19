@@ -367,10 +367,10 @@ function nearestCity(latitude, longitude) {
 
   console.log("Number of cities: %s", cities.length);
 
-  for (index = 0; index < cities.length; index++) {
-    var dif = PythagorasEquirectangular(latitude, longitude, cities[index][1], cities[index][2]);
+  for (var i = 0; i < cities.length; i++) {
+    var dif = PythagorasEquirectangular(latitude, longitude, cities[i][1], cities[i][2]);
     if (dif < mindif) {
-      closest = index;
+      closest = i;
       mindif = dif;
     }
   }
