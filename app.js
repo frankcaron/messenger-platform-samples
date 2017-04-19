@@ -323,14 +323,10 @@ function receivedMessage(event) {
                }
     }
   } else if (messageAttachments) {
-    sendTextMessage(senderID, "Message with attachment received");
-    sendTextMessage(senderID, "Your latitude is: " + messageAttachments[0].payload.coordinates.lat);
-    sendTextMessage(senderID, "Your longtitude is: " + messageAttachments[0].payload.coordinates.long);
-    console.log("Random commit");
-
+    sendTextMessage(senderID, "Awesome. Let me look that up for you. One sec!");
+    console.log("User's latitude is: " + messageAttachments[0].payload.coordinates.lat);
+    console.log("User's longtitude is: " + messageAttachments[0].payload.coordinates.long);
     nearestCity(messageAttachments[0].payload.coordinates.lat, messageAttachments[0].payload.coordinates.long,senderID);
-
-
   }
 }
 
@@ -371,11 +367,16 @@ function nearestCity(latitude, longitude, senderID) {
     var dif = PythagorasEquirectangular(latitude, longitude, cities[i][1], cities[i][2]);
     if (dif < mindif) {
       closest = i;
-      mindif = dif;
+      break;
     }
   }
 
-  sendTextMessage(senderID, "The closest restaurant is: " + cities[closest][0]);
+  if (cities[closest][0] != null) {
+    sendTextMessage(senderID, "The closest restaurant is: " + cities[closest][0]);
+  } else {
+    sendTextMessage(senderID, "There are no restaurants closed to your location. Sorry, bruh.");
+  }
+  
 }
 
 /*
