@@ -264,9 +264,7 @@ function receivedMessage(event) {
 
 
     switch (messageText) {
-      case 'restaurant':
-        sendTextMessage(senderID, "Let me find you a neat restaurant near you...");
-        break;
+
       case 'image':
         sendImageMessage(senderID);
         break;
@@ -317,6 +315,10 @@ function receivedMessage(event) {
 
       case 'account linking':
         sendAccountLinking(senderID);
+        break;
+
+      case 'restaurant':
+        sendTextMessage(senderID, "Let me find one...");
         break;
 
       default:
