@@ -330,7 +330,7 @@ function receivedMessage(event) {
     sendTextMessage(senderID, "Your longtitude is: " + messageAttachments[0].payload.coordinates.long);
     console.log("Random commit");
 
-    //nearestCity(messageAttachments[0].payload.coordinates.lat, messageAttachments[0].payload.coordinates.long);
+    nearestCity(messageAttachments[0].payload.coordinates.lat, messageAttachments[0].payload.coordinates.long);
 
 
   }
