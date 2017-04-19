@@ -412,7 +412,8 @@ function sendRestaurantList(recipientId, restaurants) {
               type: "web_url",
               url: "https://www.google.ca/" + restaurants[i][3],
               title: "Open Web URL"
-            }
+            }]
+          }
   }
 
   var messageData = {
