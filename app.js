@@ -375,7 +375,6 @@ function nearestCity(latitude, longitude) {
 
   // echo the nearest city
   sendTextMessage(senderID, "The closest restaurant is: " + cities[closest][0]);
-  break;
 }
 
 /*
