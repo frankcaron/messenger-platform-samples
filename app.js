@@ -433,7 +433,7 @@ function sendRestaurantList(recipientId, restaurants) {
     restaurantList[i] = {
             title: restaurants[i]["name"],
             subtitle: restaurants[i]["type"],
-            //image_url: SERVER_URL + "/assets/rift.png",
+            image_url: "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?size=764x400&center="+restaurants[i]["lat"]+","+restaurants[i]["lon"]+"&zoom=25&markers="+restaurants[i]["lat"]+","+restaurants[i]["lon"],
             default_action: {
               type: "web_url",
               url: restaurants[i]["website"]
