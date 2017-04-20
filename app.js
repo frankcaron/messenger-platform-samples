@@ -447,12 +447,17 @@ function sendRestaurantList(recipientId, restaurants) {
             buttons:[{
                 type: "web_url",
                 url: "https://www.google.ca/#q=" + restaurants[i]["name"] + " " + restaurants[i]["city"],
-                title: "View Venue Details"
+                title: "View Details"
               },
               {
                 type: "web_url",
                 url: restaurants[i]["website"],
                 title: "Visit Website"
+              },
+              {
+                type: "phone_number",
+                url: restaurants[i]["phone"],
+                title: "Call Venue"
               }]
           }
   }
