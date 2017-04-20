@@ -413,6 +413,7 @@ function nearestCity(latitude, longitude, senderID) {
       console.log("==========");
     }
   }
+  restaurants.reverse();
 
   if (closest == 0) {
     console.log("Found no matches.");
