@@ -374,12 +374,12 @@ function nearestCity(latitude, longitude, senderID) {
 
   for (var i = 0; i < customerList.length; i++) {
 
-    var dif = PythagorasEquirectangular(latitude, longitude, customerList[i][13], customerList[i][14]);
+    var dif = PythagorasEquirectangular(latitude, longitude, customerList[i]["lat"], customerList[i]["lon"]);
 
     //Test
     console.log("==========");
-    console.log("City Lat: " + customerList[i][13]);
-    console.log("City Lon: " + customerList[i][14]);
+    console.log("City Lat: " + customerList[i]["lat"]);
+    console.log("City Lon: " + customerList[i]["lon"]);
     console.log("Lat/Lon Diff: " + dif);
     console.log("Min Dif: " + mindif);
     console.log("==========");
