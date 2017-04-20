@@ -17,7 +17,8 @@ const
   express = require('express'),
   https = require('https'),
   request = require('request');
-  sleep = require('sleep');
+  
+var sleep = require('sleep');
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
