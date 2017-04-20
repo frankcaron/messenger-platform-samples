@@ -453,12 +453,13 @@ function sendRestaurantList(recipientId, restaurants) {
                 type: "web_url",
                 url: restaurants[i]["website"],
                 title: "Visit Website"
-              },
+              }]
+              /*,
               {
                 type: "phone_number",
                 url: "+" + restaurants[i]["phone"],
                 title: "Call Venue"
-              }]
+              }]*/
           }
   }
 
