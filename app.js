@@ -456,7 +456,7 @@ function sendRestaurantList(recipientId, restaurants) {
               },
               {
                 type: "phone_number",
-                url: restaurants[i]["phone"],
+                url: "+" + restaurants[i]["phone"],
                 title: "Call Venue"
               }]
           }
