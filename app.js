@@ -270,6 +270,12 @@ function receivedMessage(event) {
 
     switch (messageText) {
 
+      case 'hi':
+        sendTextMessage(senderID, "Hi there! I'm Stro, TouchBistro's friendly assistant. I'm here to help you learn more about TouchBistro.");
+        break;
+
+      /*
+
       case 'image':
         sendImageMessage(senderID);
         break;
@@ -322,23 +328,34 @@ function receivedMessage(event) {
         sendAccountLinking(senderID);
         break;
 
+      */
+
       default:
+
              if (messageText.includes("restaurant")) {
                sendRestaurantQuickReply(senderID);
+             } else if (messageText.includes("help")) {
+                sendTextMessage(senderID, "Here's a few of the things I can do for you. Just message me any of the following:");
+                sendTextMessage(senderID, "'restaurant': I'll help you find a TouchBistro restaurant near your location.");
+                sendTextMessage(senderID, "'connect': I'll connect you to a sales person.");
+                sendTextMessage(senderID, "'support': I'll connect you to a support person.");
+                sendTextMessage(senderID, "'POS': I'll tell you more about TouchBistro POS.");
              } else {
-               sendTextMessage(senderID, "Hrm. I haven't learned that command yet.");
+               sendTextMessage(senderID, "Hrm. I haven't learned that command yet. If you type 'help', I can give you some tips on how I might be able to help.");
              }
     }
   } else if (messageAttachments) {
 
-    sendTextMessage(senderID, "Awesome. Let me look that up for you. One sec!");
+    if (messageAttachments[0].type == "location") {
+      sendTextMessage(senderID, "Awesome. I've got your location. Let me find a TouchBistro venue near you. One sec!");
 
-    //Test
-    console.log("User's latitude is: " + messageAttachments[0].payload.coordinates.lat);
-    console.log("User's longtitude is: " + messageAttachments[0].payload.coordinates.long);
+      //Test
+      console.log("User's latitude is: " + messageAttachments[0].payload.coordinates.lat);
+      console.log("User's longtitude is: " + messageAttachments[0].payload.coordinates.long);
 
-    //Do your magic
-    nearestCity(messageAttachments[0].payload.coordinates.lat, messageAttachments[0].payload.coordinates.long, senderID);
+      //Do your magic
+      nearestCity(messageAttachments[0].payload.coordinates.lat, messageAttachments[0].payload.coordinates.long, senderID);
+    }
   }
 }
 
@@ -395,7 +412,7 @@ function nearestCity(latitude, longitude, senderID) {
 
   if (closest == 0) {
     console.log("Found no matches.");
-    sendTextMessage(senderID, "Bah. Looks like we couldn't find a restaurant close to you. Sorry about that!");
+    sendTextMessage(senderID, "Uh oh. Looks like we couldn't find a restaurant close to you. Sorry about that!");
   } else {
     sendRestaurantList(senderID, restaurants);
   }
