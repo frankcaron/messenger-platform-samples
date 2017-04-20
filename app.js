@@ -436,7 +436,7 @@ function sendRestaurantList(recipientId, restaurants) {
             //image_url: SERVER_URL + "/assets/rift.png",
             default_action: {
               type: "web_url",
-              url: restaurants[i]["website"];
+              url: restaurants[i]["website"]
             },
             buttons:[{
                 type: "web_url",
