@@ -411,16 +411,16 @@ function sendRestaurantList(recipientId, restaurants) {
 
   for (var i = 0; i < restaurants.length; i++) {
     restaurantList[i] = {
-            title: restaurants[i][1],
-            subtitle: "This restaurant rules bruh.",
+            title: restaurants[i]["name"],
+            subtitle: restaurants[i]["type"],
             //image_url: SERVER_URL + "/assets/rift.png",
             default_action: {
               type: "web_url",
-              url: "https://www.google.ca/#q=" + restaurants[i][1] + " " + restaurants[i][8]
+              url: "https://www.google.ca/#q=" + restaurants[i]["name"] + " " + restaurants[i]["city"]
             },
             buttons:[{
                 type: "web_url",
-                url: "https://www.google.ca/#q=" + restaurants[i][1] + " " + restaurants[i][8],
+                url: "https://www.google.ca/#q=" + restaurants[i]["name"] + " " + restaurants[i]["city"],
                 title: "Visit Venue Website"
               }]
           }
