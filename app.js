@@ -337,12 +337,11 @@ function receivedMessage(event) {
              if (messageText.includes("restaurant")) {
                sendRestaurantQuickReply(senderID);
              } else if (messageText.includes("help")) {
-                sendTextMessage(senderID, "Here's a few of the things I can do for you. Just message me any of the following:");
-                sleep.sleep(1);
-                sendTextMessage(senderID, "'restaurant': I'll help you find a TouchBistro restaurant near your location.");
-                sendTextMessage(senderID, "'connect': I'll connect you to a sales person.");
-                sendTextMessage(senderID, "'support': I'll connect you to a support person.");
-                sendTextMessage(senderID, "'POS': I'll tell you more about TouchBistro POS.");
+                sendTextMessage(senderID, "Here's a few of the things I can do for you. Just message me any of the following:" +
+                                          "\n'restaurant': I'll help you find a TouchBistro restaurant near your location." + 
+                                          "\n'connect': I'll connect you to a sales person." + 
+                                          "\n'support': I'll connect you to a support person." + 
+                                          "\n'POS': I'll tell you more about TouchBistro POS.");
              } else {
                sendTextMessage(senderID, "Hrm. I haven't learned that command yet. If you type 'help', I can give you some tips on how I might be able to help.");
              }
@@ -431,6 +430,11 @@ function sendRestaurantList(recipientId, restaurants) {
   var restaurantList = [];
 
   for (var i = 0; i < restaurants.length; i++) {
+
+    if (restaurants[i]["website"] == "") {
+      restaurants[i]["website"] = "https://www.google.ca/#q=" + restaurants[i]["name"] + " " + restaurants[i]["city"];
+    }
+
     restaurantList[i] = {
             title: restaurants[i]["name"],
             subtitle: restaurants[i]["type"],
