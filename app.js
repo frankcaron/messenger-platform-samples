@@ -17,6 +17,7 @@ const
   express = require('express'),
   https = require('https'),
   request = require('request');
+  sleep = require('sleep');
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
@@ -336,6 +337,7 @@ function receivedMessage(event) {
                sendRestaurantQuickReply(senderID);
              } else if (messageText.includes("help")) {
                 sendTextMessage(senderID, "Here's a few of the things I can do for you. Just message me any of the following:");
+                sleep.sleep(1);
                 sendTextMessage(senderID, "'restaurant': I'll help you find a TouchBistro restaurant near your location.");
                 sendTextMessage(senderID, "'connect': I'll connect you to a sales person.");
                 sendTextMessage(senderID, "'support': I'll connect you to a support person.");
@@ -348,6 +350,7 @@ function receivedMessage(event) {
 
     if (messageAttachments[0].type == "location") {
       sendTextMessage(senderID, "Awesome. I've got your location. Let me find a TouchBistro venue near you. One sec!");
+      sleep.sleep(1);
 
       //Test
       console.log("User's latitude is: " + messageAttachments[0].payload.coordinates.lat);
@@ -433,12 +436,17 @@ function sendRestaurantList(recipientId, restaurants) {
             //image_url: SERVER_URL + "/assets/rift.png",
             default_action: {
               type: "web_url",
-              url: "https://www.google.ca/#q=" + restaurants[i]["name"] + " " + restaurants[i]["city"]
+              url: restaurants[i]["website"];
             },
             buttons:[{
                 type: "web_url",
                 url: "https://www.google.ca/#q=" + restaurants[i]["name"] + " " + restaurants[i]["city"],
-                title: "Visit Venue Website"
+                title: "View Venue Details"
+              },
+              {
+                type: "web_url",
+                url: restaurants[i]["website"],
+                title: "Visit Website"
               }]
           }
   }
