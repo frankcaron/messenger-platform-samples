@@ -25,7 +25,7 @@ app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.use(express.static('public'));
 
 //Set Up CSV
-var customerList = ["salesperson", "name", "phone", "type", "account_type", "street_1", "street 2", "street 3", "city", "state",c"country", "zip", "full_address", "lat", "lon", "website"];
+var customerList = ["salesperson", "name", "phone", "type", "account_type", "street_1", "street 2", "street 3", "city", "state", "country", "zip", "full_address", "lat", "lon", "website"];
 require("csv-to-array")({
    file: "config/customers.csv",
    columns: customerList
