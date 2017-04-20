@@ -19,6 +19,7 @@ const
   request = require('request');
   
 var sleep = require('sleep');
+var lower_case = require('lower-case');
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
@@ -246,7 +247,7 @@ function receivedMessage(event) {
   var metadata = message.metadata;
 
   // You may get a text or attachment but not both
-  var messageText = message.text;
+  var messageText = lowerCase(message.text);
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
 
@@ -438,7 +439,7 @@ function sendRestaurantList(recipientId, restaurants) {
     restaurantList[i] = {
             title: restaurants[i]["name"],
             subtitle: restaurants[i]["type"],
-            image_url: "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?size=764x400&center="+restaurants[i]["lat"]+","+restaurants[i]["lon"]+"&zoom=25&markers="+restaurants[i]["lat"]+","+restaurants[i]["lon"],
+            image_url: "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?size=764x400&center="+restaurants[i]["lat"]+","+restaurants[i]["lon"]+"&zoom=15&markers="+restaurants[i]["lat"]+","+restaurants[i]["lon"],
             default_action: {
               type: "web_url",
               url: restaurants[i]["website"]
