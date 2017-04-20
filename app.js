@@ -19,7 +19,7 @@ const
   request = require('request');
   
 var sleep = require('sleep');
-var lower_case = require('lower-case');
+var lowerCase = require('lower-case');
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
