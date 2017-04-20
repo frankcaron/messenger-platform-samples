@@ -368,7 +368,8 @@ function nearestCity(latitude, longitude, senderID) {
   var lon = longitude; // user's longitude
   var restaurants = []; // array for matching restaurants
 
-  console.log("Number of cities: %s", customerList.length);
+  console.log("Number of restaurants: %s", customerList.length);
+  console.log("Restaurant list: %s", customerList);
 
   for (var i = 0; i < customerList.length; i++) {
 
